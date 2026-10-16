@@ -48,68 +48,64 @@ interface EmbedUrlOpts {
  * Ordered by reliability — the first one that works wins.
  */
 export const STREAM_SERVERS: StreamServerOption[] = [
-  /* ── 1. VidLink ────────────────────────────────────────────────── */
+  /* ── 1. VidSrc PM (Primary & Fast) ────────────────────────────────── */
   {
-    id: "vidlink",
-    label: "🔥 Server 1 (VidLink)",
+    id: "vidsrc-pm",
+    label: "🔥 Server 1 (VidSrc Ultra)",
     buildUrl: ({ tmdbId, type, season, episode }) =>
       type === "tv" && season && episode
-        ? `https://vidlink.pro/tv/${tmdbId}/${season}/${episode}?primaryColor=e50914&secondaryColor=ffffff&autoplay=true&title=true`
-        : `https://vidlink.pro/movie/${tmdbId}?primaryColor=e50914&secondaryColor=ffffff&autoplay=true&title=true`,
+        ? `https://vidsrc.pm/embed/tv/${tmdbId}/${season}/${episode}`
+        : `https://vidsrc.pm/embed/movie/${tmdbId}`,
   },
 
-  /* ── 2. VidSrc.icu ─────────────────────────────────────────────── */
+  /* ── 2. VidSrc TO (High Reliability) ──────────────────────────────── */
   {
-    id: "vidsrc-icu",
-    label: "⚡ Server 2 (VidSrc ICU)",
+    id: "vidsrc-to",
+    label: "⚡ Server 2 (VidSrc Stream)",
     buildUrl: ({ tmdbId, type, season, episode }) =>
       type === "tv" && season && episode
-        ? `https://vidsrc.icu/embed/tv/${tmdbId}/${season}/${episode}`
-        : `https://vidsrc.icu/embed/movie/${tmdbId}`,
+        ? `https://vidsrc.to/embed/tv/${tmdbId}/${season}/${episode}`
+        : `https://vidsrc.to/embed/movie/${tmdbId}`,
   },
 
-  /* ── 3. 2embed ─────────────────────────────────────────────────── */
+  /* ── 3. 2Embed (Fast Mirror) ───────────────────────────────────────── */
   {
-    id: "2embed",
-    label: "🎬 Server 3 (2Embed)",
+    id: "2embed-org",
+    label: "🎬 Server 3 (2Embed Pro)",
     buildUrl: ({ tmdbId, type, season, episode }) =>
       type === "tv" && season && episode
-        ? `https://www.2embed.cc/embedtv/${tmdbId}&s=${season}&e=${episode}`
-        : `https://www.2embed.cc/embed/${tmdbId}`,
+        ? `https://2embed.org/embed/${tmdbId}/${season}/${episode}`
+        : `https://2embed.org/embed/${tmdbId}`,
   },
 
-  /* ── 4. FrameXTV Auto ──────────────────────────────────────────── */
+  /* ── 4. VidSrc Net ─────────────────────────────────────────────────── */
   {
-    id: "framex-auto",
-    label: "🎥 Server 4 (FrameX)",
-    buildUrl: ({ tmdbId, type, season, episode }) => {
-      const base = "https://framextv.xyz/embed";
-      const path =
-        type === "tv" && season && episode
-          ? `${base}/${tmdbId}/${season}/${episode}`
-          : `${base}/${tmdbId}`;
-      return `${path}?autoplay=1&muted=0&backend=prod`;
-    },
-  },
-
-  /* ── 5. AutoEmbed ──────────────────────────────────────────────── */
-  {
-    id: "autoembed",
-    label: "📡 Server 5 (AutoEmbed)",
+    id: "vidsrc-net",
+    label: "📡 Server 4 (VidSrc Net)",
     buildUrl: ({ tmdbId, type, season, episode }) =>
       type === "tv" && season && episode
-        ? `https://player.autoembed.cc/embed/tv/${tmdbId}/${season}/${episode}`
-        : `https://player.autoembed.cc/embed/movie/${tmdbId}`,
+        ? `https://vidsrc.net/embed/tv/${tmdbId}/${season}/${episode}`
+        : `https://vidsrc.net/embed/movie/${tmdbId}`,
   },
 
-  /* ── 6. VidSrc.pro ─────────────────────────────────────────────── */
+  /* ── 5. MultiEmbed ─────────────────────────────────────────────────── */
   {
-    id: "vidsrc-pro",
-    label: "🌐 Server 6 (VidSrc Pro)",
+    id: "multiembed",
+    label: "🎥 Server 5 (SuperEmbed)",
     buildUrl: ({ tmdbId, type, season, episode }) =>
       type === "tv" && season && episode
-        ? `https://vidsrc.pro/embed/tv/${tmdbId}/${season}/${episode}`
-        : `https://vidsrc.pro/embed/movie/${tmdbId}`,
+        ? `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1&s=${season}&e=${episode}`
+        : `https://multiembed.mov/?video_id=${tmdbId}&tmdb=1`,
+  },
+
+  /* ── 6. FrameX Direct ──────────────────────────────────────────────── */
+  {
+    id: "framex-direct",
+    label: "🌐 Server 6 (FrameX Direct)",
+    buildUrl: ({ tmdbId, type, season, episode }) =>
+      type === "tv" && season && episode
+        ? `https://framextv.xyz/embed/${tmdbId}/${season}/${episode}?autoplay=1`
+        : `https://framextv.xyz/embed/${tmdbId}?autoplay=1`,
   },
 ];
 
@@ -133,7 +129,7 @@ export function buildStreamEmbedUrl({
   type = "movie",
   season,
   episode,
-  serverId = "vidlink",
+  serverId = "vidsrc-pm",
 }: BuildStreamUrlOpts): string {
   const validId = parseTmdbId(tmdbId);
   const server = STREAM_SERVERS.find((s) => s.id === serverId) ?? STREAM_SERVERS[0];

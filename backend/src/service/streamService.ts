@@ -22,9 +22,9 @@ function buildUrl(path: string) {
 export async function getMovieStreamUrl(tmdbIdRaw: unknown) {
   const tmdbId = parsePosInt(tmdbIdRaw, "tmdbId");
 
-  // frameXTV embed URL format: https://framextv.xyz/embed/{tmdbId}?autoplay=1&muted=0&backend=prod
+  // frameXTV embed URL format: https://framextv.xyz/embed/{tmdbId}?autoplay=1
   if (STREAM_SOURCE.includes("framextv")) {
-    return { url: buildUrl(`/embed/${tmdbId}?autoplay=1&muted=0&backend=prod`) };
+    return { url: buildUrl(`/embed/${tmdbId}?autoplay=1`) };
   }
 
   return { url: buildUrl(`/embed/movie/${tmdbId}`) };
@@ -39,9 +39,9 @@ export async function getTvStreamUrl(
   const season = parsePosInt(seasonRaw, "season");
   const episode = parsePosInt(episodeRaw, "episode");
 
-  // frameXTV embed URL format: https://framextv.xyz/embed/{tmdbId}/{season}/{episode}?autoplay=1&muted=0&backend=prod
+  // frameXTV embed URL format: https://framextv.xyz/embed/{tmdbId}/{season}/{episode}?autoplay=1
   if (STREAM_SOURCE.includes("framextv")) {
-    return { url: buildUrl(`/embed/${tmdbId}/${season}/${episode}?autoplay=1&muted=0&backend=prod`) };
+    return { url: buildUrl(`/embed/${tmdbId}/${season}/${episode}?autoplay=1`) };
   }
 
   return { url: buildUrl(`/embed/tv/${tmdbId}/${season}/${episode}`) };

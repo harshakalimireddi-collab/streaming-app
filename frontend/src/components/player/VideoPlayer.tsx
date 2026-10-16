@@ -318,9 +318,8 @@ export function VideoPlayer({
           ref={iframeRef}
           src={embedUrl}
           className="w-full h-full border-0 bg-black"
-          referrerPolicy="no-referrer"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"
-          allow="autoplay; fullscreen; picture-in-picture; encrypted-media; clipboard-write"
+          referrerPolicy="origin"
+          allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer"
           allowFullScreen
           title={
             title
