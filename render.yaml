@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: streaming-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: TMDB_API_KEY
+        sync: false
+      - key: STREAM_SOURCE
+        value: https://framextv.xyz
+      - key: CORS_ORIGIN
+        value: '*'
+      - key: LOG_LEVEL
+        value: info

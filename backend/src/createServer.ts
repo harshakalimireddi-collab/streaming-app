@@ -22,7 +22,7 @@ export default async function createServer(): Promise<Server> {
     getApp: () => app as Express,
     start: () =>
       new Promise<void>((resolve) => {
-        const port = process.env.PORT;
+        const port = process.env.PORT || 3000;
         app.listen(port, () => {
           getLogger().info(`🚀 Server listening at http://localhost:${port}`);
           resolve();
