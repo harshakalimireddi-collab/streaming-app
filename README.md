@@ -1,5 +1,12 @@
 # Streaming App
 
+[![Frontend](https://img.shields.io/badge/Frontend-GitHub%20Pages-blue?logo=github)](https://harshakalimireddi-collab.github.io/streaming-app/)
+[![Backend](https://img.shields.io/badge/Backend-Vercel-black?logo=vercel)](https://backend-six-lyart-63.vercel.app/api/health/ping)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> 🚀 **Live Frontend**: [https://harshakalimireddi-collab.github.io/streaming-app/](https://harshakalimireddi-collab.github.io/streaming-app/)  
+> ⚡ **Live Backend API**: [https://backend-six-lyart-63.vercel.app/api](https://backend-six-lyart-63.vercel.app/api)
+
 A self-hosted web application for discovering movies and TV shows and playing
 them through a user-configured streaming source. Streaming App combines a
 cinematic React interface with a small Express API and is designed for personal
