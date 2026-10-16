@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-body);
+  
+  /* Color Palette Tokens */
+  --bg-canvas: #070709;
+  --bg-surface: #0e0e13;
+  --bg-surface-elevated: #15151e;
+  --bg-surface-hover: #1c1c28;
+  
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-focus: rgba(229, 9, 20, 0.6);
+  
+  --text-primary: #f5f5f7;
+  --text-secondary: #9a9cae;
+  --text-tertiary: #606275;
+  
+  --accent-red: #e50914;
+  --accent-red-hover: #b80710;
+  --accent-red-subtle: rgba(229, 9, 20, 0.12);
+  --accent-red-glow: rgba(229, 9, 20, 0.25);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-display, .font-heading {
+  font-family: var(--font-display);
+}
+
+button, [role="button"], a {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Cinematic Scrim Overlays */
+.scrim-hero {
+  background: 
+    linear-gradient(to right, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.7) 35%, rgba(7, 7, 9, 0.2) 65%, rgba(7, 7, 9, 0) 100%),
+    linear-gradient(to top, rgba(7, 7, 9, 1) 0%, rgba(7, 7, 9, 0.8) 15%, transparent 60%),
+    linear-gradient(to bottom, rgba(7, 7, 9, 0.6) 0%, transparent 25%);
+}
+
+.scrim-card-overlay {
+  background: linear-gradient(to top, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.5) 45%, transparent 100%);
+}
+
+/* Smooth Image Loading Skeleton */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Intro Loader Animations */
+.intro-loader__mark {
+  box-shadow: 0 0 0 0 rgb(229 9 20 / 0.28);
+  animation: intro-mark-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both,
+    intro-mark-pulse 1.25s 540ms ease-out infinite;
+}
+
+.intro-loader__wordmark {
+  animation: intro-wordmark-in 420ms 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.intro-loader__signal span {
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.38);
+  animation: intro-signal 900ms ease-in-out infinite;
+}
+
+.intro-loader__signal span:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.intro-loader__signal span:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.intro-loader--leaving .intro-loader__brand {
+  animation: intro-brand-collapse 180ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+.intro-loader--leaving .intro-loader__panel--top {
+  animation: intro-panel-top-out 520ms 150ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.intro-loader--leaving .intro-loader__panel--bottom {
+  animation: intro-panel-bottom-out 520ms 150ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.intro-loader__beam {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(0);
+  box-shadow: 0 0 1rem rgb(229 9 20 / 0.8);
+}
+
+.intro-loader--leaving .intro-loader__beam {
+  animation: intro-beam 460ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.intro-loader--leaving .intro-loader__mark,
+.intro-loader--leaving .intro-loader__wordmark {
+  animation: none;
+}
+
+.intro-loader--leaving .intro-loader__signal {
+  opacity: 0;
+}
+
+@keyframes intro-mark-in {
+  from { opacity: 0; transform: scale(0.45) rotate(-12deg); }
+  65% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes intro-mark-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(229 9 20 / 0.28); }
+  70%, 100% { box-shadow: 0 0 0 1.25rem rgb(229 9 20 / 0); }
+}
+
+@keyframes intro-wordmark-in {
+  from { opacity: 0; transform: translateX(-0.6rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes intro-signal {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-0.25rem); }
+}
+
+@keyframes intro-brand-collapse {
+  from {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1.75, 1.75);
+  }
+  to {
+    clip-path: inset(49.5% 0 49.5% 0);
+    transform: scale(1.95, 0.02);
+  }
+}
+
+@keyframes intro-beam {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0);
+  }
+  18% { opacity: 1; }
+  55% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
+
+@keyframes intro-panel-top-out {
+  to { transform: translateY(-100%); }
+}
+
+@keyframes intro-panel-bottom-out {
+  to { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .intro-loader__mark,
+  .intro-loader__wordmark,
+  .intro-loader__signal span,
+  .intro-loader--leaving .intro-loader__brand,
+  .intro-loader--leaving .intro-loader__panel,
+  .intro-loader--leaving .intro-loader__beam {
+    animation: none;
+  }
+
+  .intro-loader--leaving {
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+}
